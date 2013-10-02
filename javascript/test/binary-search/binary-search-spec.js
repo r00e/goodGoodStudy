@@ -9,6 +9,17 @@ describe("chopRecursion", function()
 	it("should return -1 when target is NOT in array", function(){
 		var array = [1];
 		expect(chopRecursion(3, array)).toEqual(-1);
+        array = [1,3,5];
+		expect(chopRecursion(0, array)).toEqual(-1);
+		expect(chopRecursion(2, array)).toEqual(-1);
+		expect(chopRecursion(4, array)).toEqual(-1);
+		expect(chopRecursion(6, array)).toEqual(-1);
+        array = [1,3,5,7];
+		expect(chopRecursion(0, array)).toEqual(-1);
+		expect(chopRecursion(2, array)).toEqual(-1);
+		expect(chopRecursion(4, array)).toEqual(-1);
+		expect(chopRecursion(6, array)).toEqual(-1);
+		expect(chopRecursion(8, array)).toEqual(-1);
 	});
 
 	it("should return 0 when target is the 1st element in array", function(){
@@ -21,6 +32,11 @@ describe("chopRecursion", function()
 		expect(chopRecursion(1, array)).toEqual(0);
 		expect(chopRecursion(3, array)).toEqual(1);
 		expect(chopRecursion(5, array)).toEqual(2);
+        array = [1,3,5,7];
+		expect(chopRecursion(1, array)).toEqual(0);
+		expect(chopRecursion(3, array)).toEqual(1);
+		expect(chopRecursion(5, array)).toEqual(2);
+		expect(chopRecursion(7, array)).toEqual(3);
 	});
 });
 

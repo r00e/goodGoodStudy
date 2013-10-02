@@ -10,13 +10,11 @@ function chopRecursion(target, array) {
     }
 	else if(target > array[midPoint])
     {
-        result = chopRecursion(target, array.slice(midPoint, array.length));
-        return getResult(midPoint, result);
+        return getResult(midPoint, chopRecursion(target, array.slice(midPoint, array.length)));
 	}
 	else if(target < array[midPoint])
     {
-        result = chopRecursion(target, array.slice(0, midPoint));
-        return getResult(0, result);
+        return getResult(0, chopRecursion(target, array.slice(0, midPoint)));
 	}
 	else
     {
@@ -25,12 +23,7 @@ function chopRecursion(target, array) {
 }
 
 function getResult(mid, position){
-    if(position == -1){
-        return -1;
-    }
-    else{
-        return mid + position;
-    }
+    return position == -1 ? -1 : mid + position;
 }
 
 // iteration style
