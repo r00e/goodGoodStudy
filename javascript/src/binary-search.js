@@ -2,7 +2,6 @@
 function chopRecursion(target, array) {
 
 	var midPoint = parseInt(array.length/2);
-    var result = 0;
 
     if(array.length == 0 || array.length == 1 && target != array[midPoint])
     {
