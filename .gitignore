@@ -2,5 +2,5 @@ codeKata.suo
 codeKata.sln.DotSettings.user
 _ReSharper.codeKata/
 kata.csproj.DotSettings.user
-obj/
-bin/
+csharp/kata/obj/
+csharp/kata/bin/
