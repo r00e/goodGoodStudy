@@ -1,58 +1,45 @@
 ﻿using System;
-using System.Globalization;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace kata
 {
     public class BinarySearch
     {
+        // recursive
         public int ChopRecursion(int target, int[] array)
         {
-            int mid = array.Length/2;
-
-            if (array.Length == 0 || array.Length == 1 && target != array[mid])
+            try
+            {
+                return ChopWithException(target, array);
+            }
+            catch(Exception)
             {
                 return -1;
             }
-            else if (target > array[mid])
-            {
-                return getResult(mid, ChopRecursion(target, GetRightHalf(array)));
-            }
-            else if (target < array[mid])
-            {
-                return getResult(0, ChopRecursion(target, GetLeftHalf(array)));
-            }
-            else
-            {
-                return mid;
-            }
+
         }
 
-        private static int[] GetLeftHalf(int[] array)
+        private static int ChopWithException(int target, int[] array)
         {
-            var newArray = new int[array.Length/2];
-            for (int i = 0; i < array.Length / 2; i++)
+            var mid = array.Length/2;
+
+            if (array.Length == 0)
             {
-                newArray[i] = array[i];
+                throw new Exception();
             }
-            return newArray;
-        }
-
-        private static int[] GetRightHalf(int[] array)
-        {
-            var newArray = new int[array.Length-array.Length/2];
-            for (int i = array.Length/2, j=0; i < array.Length; i++, j++)
+            if (target > array[mid])
             {
-                newArray[j] = array[i];
+                return mid + ChopWithException(target, array.Skip(mid + 1).ToArray()) + 1;
             }
-            return newArray;
+            if (target < array[mid])
+            {
+                return ChopWithException(target, array.Take(mid).ToArray());
+            }
+            return mid;
         }
 
-        private int getResult(int mid, int position)
-        {
-            return position == -1 ? -1 : mid + position;
-        }
-
+        // iteration
         public int ChopIteration(int target, int[] array)
         {
             int left = 0;
