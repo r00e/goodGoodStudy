@@ -6,7 +6,6 @@ namespace kata
 {
     public class BinarySearch
     {
-        // recursive
         public int ChopRecursion(int target, int[] array)
         {
             try
@@ -30,16 +29,25 @@ namespace kata
             }
             if (target > array[mid])
             {
-                return mid + ChopWithException(target, array.Skip(mid + 1).ToArray()) + 1;
+                return mid + ChopWithException(target, GetRightHalf(mid, array)) + 1;
             }
             if (target < array[mid])
             {
-                return ChopWithException(target, array.Take(mid).ToArray());
+                return ChopWithException(target, GetLeftHalf(mid, array));
             }
             return mid;
         }
 
-        // iteration
+        private static int[] GetLeftHalf(int mid, int[] array)
+        {
+            return array.Take(mid).ToArray();
+        }
+
+        private static int[] GetRightHalf(int mid, int[] array)
+        {
+            return array.Skip(mid + 1).ToArray();
+        }
+
         public int ChopIteration(int target, int[] array)
         {
             int left = 0;
