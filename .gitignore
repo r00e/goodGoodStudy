@@ -7,3 +7,5 @@ csharp/kata/bin/
 kata.csproj.ReSharper
 codeKata.5.1.ReSharper.user
 *.swp
+football.dat
+weather.dat
