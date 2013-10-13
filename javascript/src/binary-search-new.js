@@ -1,12 +1,12 @@
 function chopRecursion(target, array) {
-    return findInLeftHalf(target, array, array.length);
+    return findInHalf(target, array, 0, array.length);
 }
 
-function findInLeftHalf(target, array, end){
-    if(end < 0){
+function findInHalf(target, array, start, end){
+    if(end < start){
         return -1;
     }
-    else if(end == 0 && target == array[0]){
+    else if(end == start && target == array[start]){
         return end;
     }
 
@@ -15,7 +15,7 @@ function findInLeftHalf(target, array, end){
         return mid;
     }
     else if(target < array[mid]){
-        return findInLeftHalf(target, array, mid-1);
+        return findInHalf(target, array, start, mid-1);
     }
     else
         return -1;
