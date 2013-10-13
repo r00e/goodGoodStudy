@@ -1,4 +1,8 @@
 // recursive style
 function chopRecursion(target, array) {
-    return -1;
+    if(array.length == 1 && target == array[0]){
+        return 0;
+    }
+    else
+        return -1;
 }
