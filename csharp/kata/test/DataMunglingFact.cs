@@ -29,5 +29,11 @@ namespace kata.test
             Assert.Equal(expected: 32.ToString(CultureInfo.InvariantCulture), actual: _weatherData.Data[1].MnT);
             Assert.Equal(expected: 97.ToString(CultureInfo.InvariantCulture), actual: _weatherData.Data[3].MxT);
         }
+
+        [Fact]
+        public void should_get_smallest_temperature_spread_day_number()
+        {
+            Assert.Equal(expected: 25.ToString(CultureInfo.InvariantCulture), actual: _weatherData.DaySmallestTemperatureSpread());
+        }
     }
 }
