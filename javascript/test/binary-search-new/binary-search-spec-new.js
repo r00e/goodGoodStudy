@@ -39,4 +39,24 @@ describe("chopRecursion", function(){
         array = [2,4,6,8,10,12];
 		expect(chopRecursion(12, array)).toEqual(5);
     });
+
+    it("should return correct position", function(){
+        var array = [2,4,6,8,10,12];
+		expect(chopRecursion(2, array)).toEqual(0);
+		expect(chopRecursion(4, array)).toEqual(1);
+		expect(chopRecursion(6, array)).toEqual(2);
+		expect(chopRecursion(8, array)).toEqual(3);
+		expect(chopRecursion(10, array)).toEqual(4);
+		expect(chopRecursion(12, array)).toEqual(5);
+    });
+
+    it("should return -1 when target is NOT in array", function(){
+        var array = [2,4,6,8,10,12];
+		expect(chopRecursion(1, array)).toEqual(-1);
+		expect(chopRecursion(3, array)).toEqual(-1);
+		expect(chopRecursion(5, array)).toEqual(-1);
+		expect(chopRecursion(7, array)).toEqual(-1);
+		expect(chopRecursion(9, array)).toEqual(-1);
+		expect(chopRecursion(0, array)).toEqual(-1);
+    });
 });
