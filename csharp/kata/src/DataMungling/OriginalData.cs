@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace kata.DataMungling
 {
     public class OriginalData
@@ -9,8 +11,8 @@ namespace kata.DataMungling
         public OriginalData(string day, string maxT, string minT)
         {
             Dy = day;
-            MxT = maxT;
-            MnT = minT;
+            MxT = Regex.Replace(maxT, "[^.0-9]", "");
+            MnT = Regex.Replace(minT, "[^.0-9]", "");
         }
     }
 }

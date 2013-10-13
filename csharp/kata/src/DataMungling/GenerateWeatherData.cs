@@ -9,7 +9,6 @@ namespace kata.DataMungling
     {
         private const string InputFile = @".\src\DataMungling\weather_copy.dat";
         private static readonly WeatherData Weather = new WeatherData();
-//        private static readonly List<OriginalData> Weather = new List<OriginalData>();
 
         public static WeatherData Generate(string inputFile = InputFile)
         {

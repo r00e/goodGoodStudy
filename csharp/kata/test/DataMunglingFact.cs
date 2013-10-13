@@ -22,5 +22,12 @@ namespace kata.test
             Assert.Equal(expected: 88.ToString(CultureInfo.InvariantCulture), actual: _weatherData.Data[0].MxT);
             Assert.Equal(expected: 59.ToString(CultureInfo.InvariantCulture), actual: _weatherData.Data[0].MnT);            
         }
+
+        [Fact]
+        public void should_remove_asterisk_in_temperature()
+        {
+            Assert.Equal(expected: 32.ToString(CultureInfo.InvariantCulture), actual: _weatherData.Data[1].MnT);
+            Assert.Equal(expected: 97.ToString(CultureInfo.InvariantCulture), actual: _weatherData.Data[3].MxT);
+        }
     }
 }
