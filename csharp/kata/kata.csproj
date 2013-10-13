@@ -48,9 +48,19 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\BinarySearch.cs" />
+    <Compile Include="src\DataMungling\GenerateWeatherData.cs" />
+    <Compile Include="src\DataMungling\OriginalData.cs" />
+    <Compile Include="src\DataMungling\WeatherData.cs" />
     <Compile Include="test\BinarySearchFact.cs" />
+    <Compile Include="test\DataMunglingFact.cs" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <None Include="src\DataMungling\weather.dat" />
+    <None Include="src\DataMungling\weather_copy.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
