@@ -6,3 +6,4 @@ csharp/kata/obj/
 csharp/kata/bin/
 kata.csproj.ReSharper
 codeKata.5.1.ReSharper.user
+*.swp
