@@ -7,12 +7,12 @@ namespace kata.test
 {
     public class DataMunglingFact
     {
-        readonly WeatherData _weatherData = GenerateWeatherData.Generate();
+        readonly WeatherData _weatherData = new GenerateWeatherData().Generate();
 
         [Fact]
         public void should_get_all_lines_with_Dy_MxT_MnT()
         {
-            Assert.Equal(4, _weatherData.Data.Count);
+            Assert.Equal(5, _weatherData.Data.Count);
         }
 
         [Fact]
@@ -31,9 +31,11 @@ namespace kata.test
         }
 
         [Fact]
-        public void should_get_smallest_temperature_spread_day_number()
+        public void should_get_all_smallest_temperature_spread_day_number()
         {
-            Assert.Equal(expected: 25.ToString(CultureInfo.InvariantCulture), actual: _weatherData.DaySmallestTemperatureSpread());
+            Assert.Equal(2, _weatherData.DaySmallestTemperatureSpread().Count);
+            Assert.Contains(expected: 25.ToString(CultureInfo.InvariantCulture), collection: _weatherData.DaySmallestTemperatureSpread());
+            Assert.Contains(expected: 28.ToString(CultureInfo.InvariantCulture), collection: _weatherData.DaySmallestTemperatureSpread());
         }
     }
 }

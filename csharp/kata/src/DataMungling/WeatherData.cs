@@ -8,10 +8,12 @@ namespace kata.DataMungling
     {
         public List<OriginalData> Data = new List<OriginalData>();
 
-        public string DaySmallestTemperatureSpread()
+        public List<string> DaySmallestTemperatureSpread()
         {
-            var newList = Data.OrderBy(d => d.TemperaturSpread);
-            return newList.First().Dy;
+            var orderList = Data.OrderBy(d => d.TemperaturSpread);
+            var smallestTempSpreadDay = Data.FindAll(d => d.TemperaturSpread == orderList.First().TemperaturSpread);
+            var result = smallestTempSpreadDay.Select(day => day.Dy).ToList();
+            return result;
         }
     }
 }

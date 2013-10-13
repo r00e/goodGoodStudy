@@ -8,22 +8,22 @@ namespace kata.DataMungling
     public class GenerateWeatherData
     {
         private const string InputFile = @".\src\DataMungling\weather_copy.dat";
-        private static readonly WeatherData Weather = new WeatherData();
+        private readonly WeatherData _weather = new WeatherData();
 
-        public static WeatherData Generate(string inputFile = InputFile)
+        public WeatherData Generate(string inputFile = InputFile)
         {
             if (!File.Exists(inputFile)) throw FileNotFoundException;
-            ReadDataFromFileToWeather(inputFile, Weather);
-            return Weather;
+            ReadDataFromFileToWeather(inputFile, _weather);
+            return _weather;
         }
 
-        protected static Exception FileNotFoundException
+        protected Exception FileNotFoundException
         {
             get { throw new NotImplementedException(); }
             set { throw new NotImplementedException(); }
         }
 
-        private static void ReadDataFromFileToWeather(string inputFile, WeatherData weather)
+        private void ReadDataFromFileToWeather(string inputFile, WeatherData weather)
         {
             using (var reader = new StreamReader(inputFile))
             {
