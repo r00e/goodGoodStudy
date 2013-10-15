@@ -5,17 +5,17 @@ namespace kata.DataMungling
 {
     public class OriginalData
     {
-        public readonly string Dy;
-        public readonly string MxT;
-        public readonly string MnT;
-        public readonly int TemperaturSpread;
+        public readonly string MainKey;
+        public readonly string Max;
+        public readonly string Min;
+        public readonly int Difference;
 
-        public OriginalData(string day, string maxT, string minT)
+        public OriginalData(string mainKey, string max, string min)
         {
-            Dy = day;
-            MxT = Regex.Replace(maxT, "[^.0-9]", "");
-            MnT = Regex.Replace(minT, "[^.0-9]", "");
-            TemperaturSpread = int.Parse(MxT) - int.Parse(MnT);
+            MainKey = mainKey;
+            Max = Regex.Replace(max, "[^.0-9]", "");
+            Min = Regex.Replace(min, "[^.0-9]", "");
+            Difference = int.Parse(Max) - int.Parse(Min);
         }
     }
 }

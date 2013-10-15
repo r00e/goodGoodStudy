@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\BinarySearch.cs" />
+    <Compile Include="src\DataMungling\GenerateScoreData.cs" />
     <Compile Include="src\DataMungling\GenerateWeatherData.cs" />
     <Compile Include="src\DataMungling\OriginalData.cs" />
     <Compile Include="src\DataMungling\WeatherData.cs" />
@@ -56,7 +57,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="src\DataMungling\weather.dat" />
+    <None Include="src\DataMungling\football_copy.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="src\DataMungling\weather_copy.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
