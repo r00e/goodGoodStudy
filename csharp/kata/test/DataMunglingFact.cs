@@ -51,5 +51,13 @@ namespace kata.test
             Assert.Equal(expected: 79.ToString(CultureInfo.InvariantCulture), actual: _scoreData.Data[0].Max);
             Assert.Equal(expected: 36.ToString(CultureInfo.InvariantCulture), actual: _scoreData.Data[0].Min);
         }
+
+        [Fact]
+        public void should_get_all_smallest_difference_team()
+        {
+            Assert.Equal(2, _weatherData.DaySmallestTemperatureSpread().Count);
+            Assert.Contains("Ipswich", _scoreData.ScoreSmallestDifference());
+            Assert.Contains("Derby", _scoreData.ScoreSmallestDifference());
+        }
     }
 }

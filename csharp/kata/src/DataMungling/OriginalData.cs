@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
@@ -15,7 +16,7 @@ namespace kata.DataMungling
             MainKey = mainKey;
             Max = Regex.Replace(max, "[^.0-9]", "");
             Min = Regex.Replace(min, "[^.0-9]", "");
-            Difference = int.Parse(Max) - int.Parse(Min);
+            Difference = Math.Abs(int.Parse(Max) - int.Parse(Min));
         }
     }
 }
