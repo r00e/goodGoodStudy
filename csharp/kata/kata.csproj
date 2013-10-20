@@ -50,8 +50,8 @@
     <Compile Include="src\BinarySearch.cs" />
     <Compile Include="src\DataMungling\GenerateScoreData.cs" />
     <Compile Include="src\DataMungling\GenerateWeatherData.cs" />
+    <Compile Include="src\DataMungling\GetSmallestDiff.cs" />
     <Compile Include="src\DataMungling\OriginalData.cs" />
-    <Compile Include="src\DataMungling\WeatherData.cs" />
     <Compile Include="test\BinarySearchFact.cs" />
     <Compile Include="test\DataMunglingFact.cs" />
   </ItemGroup>

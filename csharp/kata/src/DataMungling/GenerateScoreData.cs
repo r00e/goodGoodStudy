@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace kata.DataMungling
@@ -9,9 +8,9 @@ namespace kata.DataMungling
     public class GenerateScoreData
     {
         private const string InputFile = @".\src\DataMungling\football_copy.dat";
-        private readonly ScoreData _score = new ScoreData();
+        private readonly List<OriginalData> _score = new List<OriginalData>();
 
-        public ScoreData Generate(string inputFile = InputFile)
+        public List<OriginalData> Generate(string inputFile = InputFile)
         {
             if (!File.Exists(inputFile)) throw FileNotFoundException;
             ReadDataFromFileToScore(inputFile, _score);
@@ -24,7 +23,7 @@ namespace kata.DataMungling
             set { throw new NotImplementedException(); }
         }
 
-        private void ReadDataFromFileToScore(string inputFile, ScoreData score)
+        private void ReadDataFromFileToScore(string inputFile, List<OriginalData> score)
         {
             using (var reader = new StreamReader(inputFile))
             {
@@ -36,23 +35,10 @@ namespace kata.DataMungling
                         var data = new List<string>(line.Split());
                         data.RemoveAll(String.IsNullOrEmpty);
                         var originalData = new OriginalData(data[1], data[6], data[8]);
-                        score.Data.Add(originalData);
+                        score.Add(originalData);
                     }
                 }
             }
-        }
-    }
-
-    public class ScoreData
-    {
-        public List<OriginalData> Data = new List<OriginalData>();
-
-        public List<string> ScoreSmallestDifference()
-        {
-            var orderList = Data.OrderBy(d => d.Difference);
-            var smallestTempSpreadDay = Data.FindAll(d => d.Difference == orderList.First().Difference);
-            var result = smallestTempSpreadDay.Select(day => day.MainKey).ToList();
-            return result;
         }
     }
 }
