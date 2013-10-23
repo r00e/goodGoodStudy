@@ -3,5 +3,8 @@ def initBitmap(mapSize)
     mapSize.times do
         array.push 0
     end
-    return array
+end
+
+def BloomFilter()
+    File.new('/usr/share/dict/words', 'r')
 end
