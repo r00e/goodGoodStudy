@@ -52,13 +52,15 @@ namespace ck4.test
         [Fact]
         public void should_return_score_when_stream_includes_valid_data()
         {
-            var str = "    1. Arsenal         38    26   9   3    79  -  36    87";
+            var obj = new object[] { "    1. Arsenal         38    26   9   3    79  -  36    87", "Arsenal", 43f };
 
-            var array = Encoding.ASCII.GetBytes(str);
+            var array = Encoding.ASCII.GetBytes((string) obj[0]);
             var stream = new MemoryStream(array);
             var score = new DataMunging().ProcessScore(stream);
 
             Assert.Equal(1, score.Count);
+            Assert.Equal(obj[1], score[0].Team);
+            Assert.Equal(obj[2],score[0].Diff);
         }
 
         [Fact]
@@ -81,17 +83,22 @@ namespace ck4.test
 
     public class Score
     {
-        private string team;
+        public string Team;
+        public float Diff;
 
-        public Score(string teamName)
+        public Score(string teamName, float diff)
         {
-            team = teamName;
+            Team = teamName;
+            Diff = diff;
         }
 
         public static Score Create(string readLine)
         {
             string[] element = readLine.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            var score = new Score(element[1]);
+            float columnF = Single.Parse(element[6]);
+            float columnA = Single.Parse(element[8]);
+            
+            var score = new Score(element[1], Math.Abs(columnF - columnA));
             return score;            
         }
     }
