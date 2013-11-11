@@ -50,6 +50,18 @@ namespace ck4.test
         }
 
         [Fact]
+        public void should_return_score_when_stream_includes_valid_data()
+        {
+            var str = "    1. Arsenal         38    26   9   3    79  -  36    87";
+
+            var array = Encoding.ASCII.GetBytes(str);
+            var stream = new MemoryStream(array);
+            var score = new DataMunging().ProcessScore(stream);
+
+            Assert.Equal(1, score.Count);
+        }
+
+        [Fact]
         public void should_return_weathers_when_stream_includes_multiple_valid_data()
         {
             var array = Encoding.ASCII.GetBytes("1  88    59    74          53.8       0.00 F       280  9.6 270  17  1.6  93 23 1004.5\n26  97*   64    81          70.4       0.00 H       050  5.1 200  12  4.0 107 45 1014.9");
@@ -69,6 +81,19 @@ namespace ck4.test
 
     public class Score
     {
+        private string team;
+
+        public Score(string teamName)
+        {
+            team = teamName;
+        }
+
+        public static Score Create(string readLine)
+        {
+            string[] element = readLine.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var score = new Score(element[1]);
+            return score;            
+        }
     }
 
     public class Selector
@@ -101,7 +126,13 @@ namespace ck4.test
         {
             var streamReader = new StreamReader(stream);
 
-            return new List<Score>();
+            var readLine = streamReader.ReadLine();
+            var scores = new List<Score>();
+
+            var score = Score.Create(readLine);
+            scores.Add(score);
+
+            return scores;
         }
     }
 
