@@ -16,7 +16,7 @@ namespace ck4.test
             string str = "";                        
             byte[] array = Encoding.ASCII.GetBytes(str);            
             Stream stream = new MemoryStream(array);
-            IList<Weather> weathers = new DataMunging().Process(stream);
+            IList<Weather> weathers = new DataMunging().ProcessWeather(stream);
             Assert.Equal(0, weathers.Count);
         }
 
@@ -42,7 +42,7 @@ namespace ck4.test
             {
                 var array = Encoding.ASCII.GetBytes((string) t[0]);
                 var stream = new MemoryStream(array);
-                var weathers = new DataMunging().Process(stream);
+                var weathers = new DataMunging().ProcessWeather(stream);
                 
                 Assert.Equal(1, weathers.Count);
                 Assert.Equal(t[1], weathers[0].Day);
@@ -69,7 +69,7 @@ namespace ck4.test
         {
             var array = Encoding.ASCII.GetBytes("1  88    59    74          53.8       0.00 F       280  9.6 270  17  1.6  93 23 1004.5\n26  97*   64    81          70.4       0.00 H       050  5.1 200  12  4.0 107 45 1014.9");
             var stream = new MemoryStream(array);
-            var weathers = new DataMunging().Process(stream);
+            var weathers = new DataMunging().ProcessWeather(stream);
                 
             Assert.Equal(2, weathers.Count);
         }
@@ -87,7 +87,7 @@ namespace ck4.test
         [Fact]
         public void should_return_empty_when_there_is_no_weather_data()
         {
-            var selected = new Selector().Select(new List<Weather>());
+            var selected = new Selector().SelectWeather(new List<Weather>());
             Assert.Equal(0, selected.Count);
         }
 
@@ -95,16 +95,25 @@ namespace ck4.test
         public void should_return_the_weather_data_with_max_diff()
         {
             var weathers = new List<Weather> { new Weather(1, 5f), new Weather(2, 15f), new Weather(3, 10f) };
-            var maxDiffDay = new Selector().Select(weathers);
+            var maxDiffDay = new Selector().SelectWeather(weathers);
 
             Assert.Equal(2, maxDiffDay[0].Day);
             Assert.Equal(15f, maxDiffDay[0].Diff);
+        }
+
+        [Fact]
+        public void should_return_all_the_weather_with_max_diff()
+        {
+            var weathers = new List<Weather> { new Weather(1, 5f), new Weather(2, 15f), new Weather(3, 15f) };
+            var maxDiffDays = new Selector().SelectWeather(weathers);
+
+            Assert.Equal(2, maxDiffDays.Count);
         }
     }
 
     public class Selector
     {
-        public IList<Weather> Select(List<Weather> weathers)
+        public IList<Weather> SelectWeather(List<Weather> weathers)
         {
             if(weathers.Count == 0)
             {
@@ -123,7 +132,7 @@ namespace ck4.test
                         weathersMaxDiff.Clear();
                         weathersMaxDiff.Add(theOne);
                     }
-                    else if(Math.Abs(theOne.Diff - weathers[i].Diff) < 0f)
+                    else if(  Math.Abs(theOne.Diff - weathers[i].Diff) < Single.Epsilon) 
                     {
                         weathersMaxDiff.Add(weathers[i]);
                     }

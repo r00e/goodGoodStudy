@@ -5,7 +5,7 @@ namespace ck4
 {
     public class DataMunging
     {
-        public IList<Weather> Process(Stream stream)
+        public IList<Weather> ProcessWeather(Stream stream)
         {
             var streamReader = new StreamReader(stream);
             
