@@ -10,13 +10,23 @@ namespace ck4.test
     public class DataMungingFacts
     {
         [Fact]
-        public void should_return_empty_data_when_stream_is_empty()
+        public void should_return_empty_data_when_weather_stream_is_empty()
         {
             string str = "";                        
             byte[] array = Encoding.ASCII.GetBytes(str);            
             Stream stream = new MemoryStream(array);
             IList<Weather> weathers = new DataMunging().Process(stream);
             Assert.Equal(0, weathers.Count);
+        }
+
+        [Fact]
+        public void should_return_empty_data_when_score_stream_is_empty()
+        {
+            string str = "";
+            byte[] array = Encoding.ASCII.GetBytes(str);
+            Stream stream = new MemoryStream(array);
+            IList<Score> scores = new DataMunging().ProcessScore(stream);
+            Assert.Equal(0, scores.Count);
         }
 
         [Fact]
@@ -57,6 +67,10 @@ namespace ck4.test
         }
     }
 
+    public class Score
+    {
+    }
+
     public class Selector
     {
         public IList<Weather> Select(List<Weather> weathers)
@@ -81,6 +95,13 @@ namespace ck4.test
                 readLine = streamReader.ReadLine();
             }
             return weathers;
+        }
+
+        public IList<Score> ProcessScore(Stream stream)
+        {
+            var streamReader = new StreamReader(stream);
+
+            return new List<Score>();
         }
     }
 
