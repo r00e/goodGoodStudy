@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -108,38 +107,6 @@ namespace ck4.test
             var maxDiffDays = new Selector().SelectWeather(weathers);
 
             Assert.Equal(2, maxDiffDays.Count);
-        }
-    }
-
-    public class Selector
-    {
-        public IList<Weather> SelectWeather(List<Weather> weathers)
-        {
-            if(weathers.Count == 0)
-            {
-                return new List<Weather>();
-            }
-            else
-            {
-                var theOne = weathers[0];
-                var weathersMaxDiff = new List<Weather> {theOne};
-
-                for(int i = 1; i < weathers.Count; i++)
-                {
-                    if(theOne.Diff < weathers[i].Diff)
-                    {
-                        theOne = weathers[i];
-                        weathersMaxDiff.Clear();
-                        weathersMaxDiff.Add(theOne);
-                    }
-                    else if(  Math.Abs(theOne.Diff - weathers[i].Diff) < Single.Epsilon) 
-                    {
-                        weathersMaxDiff.Add(weathers[i]);
-                    }
-                }
-
-                return weathersMaxDiff;
-            }
         }
     }
 }
