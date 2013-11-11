@@ -87,13 +87,22 @@ namespace ck4.test
             var selected = new Selector().Select(new List<Weather>());
             Assert.Equal(0, selected.Count);
         }
+
+        [Fact]
+        public void should_return_count_of_weather_data()
+        {
+            var weathers = new List<Weather> {new Weather(1, 5f), new Weather(2, 15f), new Weather(3, 20f)};
+            var selected = new Selector().Select(weathers);
+
+            Assert.Equal(3, selected.Count);
+        }
     }
 
     public class Selector
     {
         public IList<Weather> Select(List<Weather> weathers)
         {
-            return new List<Weather>();
+            return weathers;
         }
     }
 }
