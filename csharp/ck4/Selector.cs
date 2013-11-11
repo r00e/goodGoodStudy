@@ -10,6 +10,33 @@ namespace ck4
             return weathers.Count == 0 ? new List<Weather>() : FindWeathersWithMaxDiff(weathers);
         }
 
+        public IList<Score> SelectScore(List<Score> scores)
+        {
+            return scores.Count == 0 ? new List<Score>() : FindScoresWithMaxDiff(scores);
+        }
+
+        private IList<Score> FindScoresWithMaxDiff(List<Score> scores)
+        {
+            var max = scores[0];
+            var scoresMaxDiff = new List<Score> { max };
+
+            for (int i = 1; i < scores.Count; i++)
+            {
+                if (max.Diff < scores[i].Diff)
+                {
+                    max = scores[i];
+                    scoresMaxDiff.Clear();
+                    scoresMaxDiff.Add(max);
+                }
+                else if (Equal(max.Diff, scores[i].Diff))
+                {
+                    scoresMaxDiff.Add(scores[i]);
+                }
+            }
+
+            return scoresMaxDiff;            
+        }
+
         private static IList<Weather> FindWeathersWithMaxDiff(IList<Weather> weathers)
         {
             var max = weathers[0];

@@ -108,5 +108,32 @@ namespace ck4.test
 
             Assert.Equal(2, maxDiffDays.Count);
         }
+
+        [Fact]
+        public void should_return_empty_when_there_is_no_score_data()
+        {
+            var selected = new Selector().SelectScore(new List<Score>());
+            Assert.Equal(0, selected.Count);
+        }
+
+        [Fact]
+        public void should_return_the_score_data_with_max_diff()
+        {
+            var scores = new List<Score> { new Score("Arsenal", 43), new Score("Liverpool", 37), new Score("Ipswich", 23) };
+            var maxDiffTeam = new Selector().SelectScore(scores);
+
+            Assert.Equal("Arsenal", maxDiffTeam[0].Team);
+            Assert.Equal(43, maxDiffTeam[0].Diff);
+        }
+
+        [Fact]
+        public void should_return_all_the_score_with_max_diff()
+        {
+            var scores = new List<Score> { new Score("Arsenal", 43), new Score("Derby", 43), new Score("Ipswich", 23) };
+            var maxDiffTeams = new Selector().SelectScore(scores);
+
+            Assert.Equal(2, maxDiffTeams.Count);
+        }
+
     }
 }
