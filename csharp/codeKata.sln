@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kata", "kata\kata.csproj", "{3B043BBF-AD24-4586-B1AA-4593F7FFE3B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ck4", "ck4\ck4.csproj", "{5D5CB130-1A28-4320-AE77-B9D54BB64DBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ck4.test", "ck4.test\ck4.test.csproj", "{2EC147E0-111F-4AA7-8E5A-FFDFAE1A89C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +11,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3B043BBF-AD24-4586-B1AA-4593F7FFE3B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B043BBF-AD24-4586-B1AA-4593F7FFE3B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B043BBF-AD24-4586-B1AA-4593F7FFE3B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B043BBF-AD24-4586-B1AA-4593F7FFE3B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D5CB130-1A28-4320-AE77-B9D54BB64DBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D5CB130-1A28-4320-AE77-B9D54BB64DBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D5CB130-1A28-4320-AE77-B9D54BB64DBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D5CB130-1A28-4320-AE77-B9D54BB64DBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EC147E0-111F-4AA7-8E5A-FFDFAE1A89C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EC147E0-111F-4AA7-8E5A-FFDFAE1A89C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EC147E0-111F-4AA7-8E5A-FFDFAE1A89C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EC147E0-111F-4AA7-8E5A-FFDFAE1A89C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,6 +4,8 @@ _ReSharper.codeKata/
 kata.csproj.DotSettings.user
 csharp/kata/obj/
 csharp/kata/bin/
+*obj/
+*bin/
 kata.csproj.ReSharper
 codeKata.5.1.ReSharper.user
 *.swp
