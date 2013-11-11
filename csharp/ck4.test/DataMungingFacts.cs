@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -80,7 +78,7 @@ namespace ck4.test
             var stream = new MemoryStream(array);
             var scores = new DataMunging().ProcessScore(stream);
 
-            Assert.Equal(2, scores.Count);            
+            Assert.Equal(2, scores.Count);         
         }
 
         [Fact]
@@ -91,88 +89,11 @@ namespace ck4.test
         }
     }
 
-    public class Score
-    {
-        public string Team;
-        public float Diff;
-
-        public Score(string teamName, float diff)
-        {
-            Team = teamName;
-            Diff = diff;
-        }
-
-        public static Score Create(string readLine)
-        {
-            string[] element = readLine.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            float columnF = Single.Parse(element[6]);
-            float columnA = Single.Parse(element[8]);
-            
-            var score = new Score(element[1], Math.Abs(columnF - columnA));
-            return score;            
-        }
-    }
-
     public class Selector
     {
         public IList<Weather> Select(List<Weather> weathers)
         {
             return new List<Weather>();
-        }
-    }
-
-    public class DataMunging
-    {
-        public IList<Weather> Process(Stream stream)
-        {
-            var streamReader = new StreamReader(stream);
-            
-            string readLine = streamReader.ReadLine();
-            var weathers = new List<Weather>();
-
-            while (readLine != null)
-            {
-                var weather = Weather.Create(readLine);
-                weathers.Add(weather);
-                readLine = streamReader.ReadLine();
-            }
-            return weathers;
-        }
-
-        public IList<Score> ProcessScore(Stream stream)
-        {
-            var streamReader = new StreamReader(stream);
-
-            var readLine = streamReader.ReadLine();
-            var scores = new List<Score>();
-
-            while(readLine != null)
-            {
-                var score = Score.Create(readLine);
-                scores.Add(score);
-                readLine = streamReader.ReadLine();
-            }
-            return scores;
-        }
-    }
-
-    public class Weather
-    {
-        public int Day;
-        public float Diff;
-
-        public Weather(int day, float diff)
-        {
-            Day = day;
-            Diff = diff;
-        }
-        public static Weather Create(string readLine)
-        {
-            string[] element = readLine.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            float max = Single.Parse(element[1].Replace("*", ""));
-            float min = Single.Parse(element[2].Replace("*", ""));
-            var weather = new Weather(Int32.Parse(element[0]), max - min);
-            return weather;
         }
     }
 }

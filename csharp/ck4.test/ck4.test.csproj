@@ -46,6 +46,12 @@
     <Compile Include="DataMungingFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ck4\ck4.csproj">
+      <Project>{5D5CB130-1A28-4320-AE77-B9D54BB64DBC}</Project>
+      <Name>ck4</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
