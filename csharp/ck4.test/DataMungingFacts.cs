@@ -32,12 +32,12 @@ namespace ck4.test
         [Fact]
         public void should_return_weather_when_stream_includes_valid_data()
         {
-            var str = new object[][] { 
+            var testData = new object[][] { 
                 new object[] {"1  88    59    74          53.8       0.00 F       280  9.6 270  17  1.6  93 23 1004.5", 1, 29f},
                 new object[] {"26  97*   64    81          70.4       0.00 H       050  5.1 200  12  4.0 107 45 1014.9", 26, 33f}
             };
 
-            foreach (object[] t in str)
+            foreach (object[] t in testData)
             {
                 var array = Encoding.ASCII.GetBytes((string) t[0]);
                 var stream = new MemoryStream(array);
@@ -52,15 +52,15 @@ namespace ck4.test
         [Fact]
         public void should_return_score_when_stream_includes_valid_data()
         {
-            var obj = new object[] { "    1. Arsenal         38    26   9   3    79  -  36    87", "Arsenal", 43f };
+            var testData = new object[] { "    1. Arsenal         38    26   9   3    79  -  36    87", "Arsenal", 43f };
 
-            var array = Encoding.ASCII.GetBytes((string) obj[0]);
+            var array = Encoding.ASCII.GetBytes((string) testData[0]);
             var stream = new MemoryStream(array);
             var score = new DataMunging().ProcessScore(stream);
 
             Assert.Equal(1, score.Count);
-            Assert.Equal(obj[1], score[0].Team);
-            Assert.Equal(obj[2],score[0].Diff);
+            Assert.Equal(testData[1], score[0].Team);
+            Assert.Equal(testData[2],score[0].Diff);
         }
 
         [Fact]
@@ -71,6 +71,16 @@ namespace ck4.test
             var weathers = new DataMunging().Process(stream);
                 
             Assert.Equal(2, weathers.Count);
+        }
+
+        [Fact]
+        public void should_return_scores_when_stream_includes_multiple_valid_data()
+        {
+            var array = Encoding.ASCII.GetBytes("    1. Arsenal         38    26   9   3    79  -  36    87\n    2. Liverpool       38    24   8   6    67  -  30    80");
+            var stream = new MemoryStream(array);
+            var scores = new DataMunging().ProcessScore(stream);
+
+            Assert.Equal(2, scores.Count);            
         }
 
         [Fact]
@@ -136,9 +146,12 @@ namespace ck4.test
             var readLine = streamReader.ReadLine();
             var scores = new List<Score>();
 
-            var score = Score.Create(readLine);
-            scores.Add(score);
-
+            while(readLine != null)
+            {
+                var score = Score.Create(readLine);
+                scores.Add(score);
+                readLine = streamReader.ReadLine();
+            }
             return scores;
         }
     }
