@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -89,12 +92,13 @@ namespace ck4.test
         }
 
         [Fact]
-        public void should_return_count_of_weather_data()
+        public void should_return_the_weather_data_with_max_diff()
         {
-            var weathers = new List<Weather> {new Weather(1, 5f), new Weather(2, 15f), new Weather(3, 20f)};
-            var selected = new Selector().Select(weathers);
+            var weathers = new List<Weather> { new Weather(1, 5f), new Weather(2, 15f), new Weather(3, 10f) };
+            var maxDiffDay = new Selector().Select(weathers);
 
-            Assert.Equal(3, selected.Count);
+            Assert.Equal(2, maxDiffDay[0].Day);
+            Assert.Equal(15f, maxDiffDay[0].Diff);
         }
     }
 
@@ -102,7 +106,31 @@ namespace ck4.test
     {
         public IList<Weather> Select(List<Weather> weathers)
         {
-            return weathers;
+            if(weathers.Count == 0)
+            {
+                return new List<Weather>();
+            }
+            else
+            {
+                var theOne = weathers[0];
+                var weathersMaxDiff = new List<Weather> {theOne};
+
+                for(int i = 1; i < weathers.Count; i++)
+                {
+                    if(theOne.Diff < weathers[i].Diff)
+                    {
+                        theOne = weathers[i];
+                        weathersMaxDiff.Clear();
+                        weathersMaxDiff.Add(theOne);
+                    }
+                    else if(Math.Abs(theOne.Diff - weathers[i].Diff) < 0f)
+                    {
+                        weathersMaxDiff.Add(weathers[i]);
+                    }
+                }
+
+                return weathersMaxDiff;
+            }
         }
     }
 }
